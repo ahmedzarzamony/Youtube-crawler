@@ -1,7 +1,7 @@
 {
-  "name": "tube1",
+  "name": "youtube-crawler",
   "version": "1.0.0",
-  "description": "",
+  "description": "aggregates the latest 500 videos of the selected channel",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
