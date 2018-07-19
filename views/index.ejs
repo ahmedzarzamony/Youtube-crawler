@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Youtube Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+        }
+        .error p {
+            color: #da9292;
+        }
+        form {
+            background-color: #f7f7f7;
+            text-align: center;
+            position: relative;
+            padding: 50px 0;
+            padding-top: 150px;
+            border-bottom: 10px solid #4483b9;
+            height: 50vh;
+        }
+
+        .channel {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
+            width: 50%;
+            min-width: 300px;
+            text-align: center;
+            color: #4483b9;
+            border: 1px solid #eee;
+        }
+
+        button {
+            background-color: #4483b9;
+            color: #fff;
+            border: none;
+            padding: 8px 25px;
+            transition: all .5s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #235279;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="/list" method="GET">
+        <% if(error){ %>
+            <div class="error">
+                <p><%= error %></p>
+            </div>
+        <% } %>
+        <input type="text" class="channel" name="channel" placeholder="Youtube srearch..." value="UCWuj6cpZL_T1U508Y082u3g">
+        <button type="submit">Get</button>
+    </form>
+
+</body>
+
+</html>

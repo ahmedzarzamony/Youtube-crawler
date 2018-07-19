@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Videos List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+        }
+        .video.ch {
+            text-align: center;
+            background-color: #f7f7f7;
+            padding: 20px 0;
+            margin-bottom: 50px;
+        }
+
+        .video.ch h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #4483b9;
+        }
+
+        .video.ch span {
+            font-size: 13px;
+            margin: 0 20px;
+        }
+
+        .video {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f7f5f5;
+            padding-bottom: 27px;
+        }
+
+        .video .count {
+            display: inline-block;
+            font-style: normal;
+            border: 2px solid #f3f3f3;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 30px;
+            margin-bottom: 20px;
+            color: #4483b9;
+        }
+
+        .video a {
+            color: #4483b9;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .video h5 {
+            margin-bottom: 10px
+        }
+
+        .video i {
+            font-style: normal;
+            margin-right: 15px;
+            color: #4483b9;
+        }
+
+        .video span {
+            text-transform: capitalize;
+            color: #999;
+        }
+        .back{
+            color:#999 !important;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="videos">
+        <% if(total){ %>
+            <% data.forEach(function(item){ %>
+                <% if(item.count == 1){ %>
+                    <div class="video ch">
+                        <h1>
+                            <%= item.name %>
+                        </h1>
+                        <span class="total">
+                            <%= (total > 500) ? 500 : total %> videos</span>
+                        <span class="datdiff"><%= date %>ms</span>
+                        
+                        <a class="back" href="/" style="position:  relative;top: 22px;">Back</a>
+                    </div>
+                    <!-- video -->
+                    <% } %>
+                        <div class="video">
+                            <i class="count">
+                                <%= item.count %>
+                            </i>
+                            <a href="https://www.youtube.com/watch?v=<%= item.id %>" target="_blank">
+                                <%= item.title %>
+                            </a>
+                            <h5>
+                                <%= item.catname %>
+                            </h5>
+                            <span>views
+                                <i>(
+                                    <%= item.statistics.viewCount %>)</i>
+                            </span>
+                            <span>likes
+                                <i>(
+                                    <%= item.statistics.likeCount %>)</i>
+                            </span>
+                            <span>dislikes
+                                <i>(
+                                    <%= item.statistics.dislikeCount %>)</i>
+                            </span>
+                            <span>favorite
+                                <i>(
+                                    <%= item.statistics.favoriteCount %>)</i>
+                            </span>
+                            <span>comments
+                                <i>(
+                                    <%= item.statistics.commentCount %>)</i>
+                            </span>
+                        </div>
+                        <!-- video -->
+                        <% }) %>
+                            <% }else{ %>
+                                <div class="video ch">
+                                    <h1>Channel have
+                                        <%= total %> Videos,                                            
+                                    </h1>
+                                    <a class="back" href="/">Back</a>
+                                </div>
+                                <% } %>
+    </div>
+    <!-- videos -->
+
+</body>
+
+</html>
