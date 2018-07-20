@@ -24,12 +24,46 @@ const apiKey = 'AIzaSyBUqO8tKDzyyE_Bbs7ArYkwuMmLT1vxnoQ';
 var cats_names = [];
 var channelId = '';
 const target = 500;
-const port = 10;
+const port = 50;
+
 
 app.get('/', function (req, res) {
     res.render('index', {
         error: req.query.error
     });
+})
+
+app.get('/channel', function (req, res) {
+    var url = decodeURIComponent(req.query.channel);
+    if (url != '') {
+        url = url.replace('https', 'http');
+        url = url.split('/');
+        //res.end(JSON.stringify(url));
+        if (url[3] == 'channel') {
+            return res.redirect(301, '/list?channel='+url[4]);
+        }else if(url[3] == 'user'){
+            console.time('Get channel id processed.')
+            var url = "https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername="+url[4]+"&key=" + apiKey;
+            https.get(url, function (res1) {
+                var body = '';
+                res1.on('data', function (chunk) {
+                    body += chunk;
+                });
+                res1.on('end', function () {
+                    var data = JSON.parse(body);
+                    console.timeEnd('Get channel id processed.')
+                    return res.redirect(301, '/list?channel='+data.items[0].id);
+                        /*if(data.pageInfo.totalResults){
+                    }*/
+                });
+            });
+        } else{
+            return res.redirect(301, '/?error=Invalid channel url 2');        
+        } 
+    }else{
+        return res.redirect(301, '/?error=Invalid channel url 1');        
+    }   
+    //next()
 })
 
 app.get('/list', function (req, res) {
@@ -38,7 +72,7 @@ app.get('/list', function (req, res) {
     var fdate = new Date();
     if (!req.query.channel || req.query.channel.length != 24) {
         console.log('Invalid channel id, back to home.')
-        return res.redirect(301, '/?error=Invalid channel id');
+        return res.redirect(301, '/?error=Invalid channel url 3');
     } else {
         channelId = req.query.channel
     }

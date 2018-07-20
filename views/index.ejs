@@ -53,13 +53,13 @@
 
 <body>
 
-    <form action="/list" method="GET">
+    <form action="/channel" method="GET">
         <% if(error){ %>
             <div class="error">
                 <p><%= error %></p>
             </div>
         <% } %>
-        <input type="text" class="channel" name="channel" placeholder="Youtube srearch..." value="UCWuj6cpZL_T1U508Y082u3g">
+        <input type="text" class="channel" name="channel" placeholder="Youtube Url...">
         <button type="submit">Get</button>
     </form>
 
